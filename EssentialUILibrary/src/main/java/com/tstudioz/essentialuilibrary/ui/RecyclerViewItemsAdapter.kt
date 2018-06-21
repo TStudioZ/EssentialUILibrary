@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 
 class RecyclerViewItemsAdapter<T, V> (private val listener: OnItemRecyclerViewListener<T>,
-                                     private val diffCallback: DiffCallback<T>,
-                                     private val viewHolderHandler: ViewHolderHandler<T, V>)
+                                      private val diffCallback: DiffCallback<T>,
+                                      private val viewHolderHandler: ViewHolderHandler<T, V>)
         : RecyclerView.Adapter<V>() where V : RecyclerView.ViewHolder {
 
     interface OnItemRecyclerViewListener<T> {
@@ -29,15 +29,15 @@ class RecyclerViewItemsAdapter<T, V> (private val listener: OnItemRecyclerViewLi
     var values: List<T>? = null
         private set;
 
-    fun setItems(newValues: List<T>?) {
+    fun setItems(newValues: List<T>) {
         if (values == null) {
             values = newValues;
-            notifyItemRangeInserted(0, newValues!!.size);
+            notifyItemRangeInserted(0, newValues.size);
         } else {
             val result = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
 
                 override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                    return diffCallback.areItemsTheSame(values!![oldItemPosition], newValues!![newItemPosition]);
+                    return diffCallback.areItemsTheSame(values!![oldItemPosition], newValues[newItemPosition]);
                 }
 
                 override fun getOldListSize(): Int {
@@ -45,11 +45,11 @@ class RecyclerViewItemsAdapter<T, V> (private val listener: OnItemRecyclerViewLi
                 }
 
                 override fun getNewListSize(): Int {
-                    return newValues!!.size;
+                    return newValues.size;
                 }
 
                 override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                    return diffCallback.areContentsTheSame(values!![oldItemPosition], newValues!![newItemPosition]);
+                    return diffCallback.areContentsTheSame(values!![oldItemPosition], newValues[newItemPosition]);
                 }
 
             });
