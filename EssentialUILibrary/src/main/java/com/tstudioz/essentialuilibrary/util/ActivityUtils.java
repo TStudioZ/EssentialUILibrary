@@ -16,6 +16,8 @@
 
 package com.tstudioz.essentialuilibrary.util;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -25,6 +27,11 @@ import android.support.v4.app.FragmentTransaction;
  * This provides methods to help Activities load their UI.
  */
 public class ActivityUtils {
+
+    public static void startActivity(Context context, Class<?> activityClass) {
+        Intent intent = new Intent(context, activityClass);
+        context.startActivity(intent);
+    }
 
     /**
      * The {@code fragment} is added to the container view with id {@code frameId}. The operation is
