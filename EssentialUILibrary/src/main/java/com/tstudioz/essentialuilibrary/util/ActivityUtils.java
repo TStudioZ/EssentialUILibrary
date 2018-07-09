@@ -18,6 +18,7 @@ package com.tstudioz.essentialuilibrary.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -29,7 +30,14 @@ import android.support.v4.app.FragmentTransaction;
 public class ActivityUtils {
 
     public static void startActivity(Context context, Class<?> activityClass) {
+        startActivity(context, activityClass, null);
+    }
+
+    public static void startActivity(Context context, Class<?> activityClass, Bundle extras) {
         Intent intent = new Intent(context, activityClass);
+        if (extras != null) {
+            intent.putExtras(extras);
+        }
         context.startActivity(intent);
     }
 
