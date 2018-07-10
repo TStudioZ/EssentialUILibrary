@@ -36,4 +36,11 @@ public class LiveDataEvent<T> {
             return null;
         return content;
     }
+
+    /**
+     * Mark the content as handled.
+     */
+    public void handleContent() {
+        hasBeenHandled = true;
+    }
 }
